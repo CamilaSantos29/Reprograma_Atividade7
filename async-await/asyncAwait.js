@@ -19,7 +19,7 @@ function enviarEmail(corpo, para){
         setTimeout(() => {  
             var deuErro = false;
             if(!deuErro){
-                resolve({time: 6, to: "jenifer@reprograma.com"}) // Promessa OK!
+                resolve({time: 6, to: "camila@reprograma.com"}) // Promessa OK!
             }else{
                 reject("Fila cheia") // Foi mal, eu falhei :(
             }
@@ -27,19 +27,18 @@ function enviarEmail(corpo, para){
     });
 }
 
-function buscarUsuario(){
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-        resolve([
-            {name: "Camila", lang: "JS"},
-            {name: "Oliveira", lang: "Python"},
-            {name: "Santos", lang: "Java"}
-        ])
-   },3000)
-})
-} 
 
-async function enviarEmail(){
+async function email(){
+    try {
+    const id = await pegarId()
+    const emailUsuario = await buscarEmailNoBanco(id)
+    const enviandoEmail = enviarEmail("Oiee, tudo bem?", emailUsuario)
+    console.log("Email enviado")
+    } catch (error) {
+         console.log(error)
+    }
 
-    
+
 }
+
+email() 
